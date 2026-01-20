@@ -9,15 +9,15 @@ export class Platform {
     @OneToMany(() => ProductPreset, (productPreset) => productPreset.platform)
     productPresets: ProductPreset[];
 
-    @Column({ unique: true })
+    @Column({ unique: true, name: 'name' })
     name: string;
 
-    @Column()
-    iconKey: string;
+    @Column({ name: 'icon_url_key' })
+    iconUrlKey: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 }

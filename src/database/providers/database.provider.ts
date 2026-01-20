@@ -2,10 +2,11 @@ import { Provider } from "@nestjs/common";
 import { DataSource } from "typeorm";
 import { DatabaseDiTokens } from "../di/database-tokens.di";
 import { Platform } from "src/product-keys/entities/platform.entity";
-import { Region } from "src/product-keys/entities/region.enttiy";
+import { Region } from "src/product-keys/entities/region.entity";
 import { Game } from "src/product-keys/entities/game.entity";
 import { Hardware } from "src/product-keys/entities/hardware.entity";
 import { ProductPreset } from "src/product-keys/entities/product-preset.entity";
+import { ProductListing } from "src/product-keys/entities/product-listing.entity";
 
 export const databaseProviders: Array<Provider> = [
     {
@@ -18,7 +19,7 @@ export const databaseProviders: Array<Provider> = [
                 username: process.env.POSTGRES_USER,
                 password: process.env.POSTGRES_PASSWORD,
                 database: process.env.POSTGRES_DB_NAME,
-                entities: [Platform, Region, Game, Hardware, ProductPreset],
+                entities: [Platform, Region, Game, Hardware, ProductPreset, ProductListing],
                 synchronize: true,
                 logging: process.env.NODE_ENV === "development",
             });

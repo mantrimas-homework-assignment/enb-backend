@@ -4,17 +4,17 @@ import { ProductPreset } from "./product-preset.entity";
 @Entity('hardware')
 export class Hardware {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 
     @OneToMany(() => ProductPreset, (productPreset) => productPreset.hardware)
     productPresets: ProductPreset[];
 
-    @Column()
+    @Column({ unique: true, name: 'name' })
     name: string;
 
-    @CreateDateColumn()
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 }

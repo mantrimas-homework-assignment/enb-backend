@@ -1,10 +1,11 @@
-import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Hardware } from "./hardware.entity";
-import { Region } from "./region.enttiy";
+import { Region } from "./region.entity";
 import { Platform } from "./platform.entity";
 import { Game } from "./game.entity";
+import { ProductListing } from "./product-listing.entity";
 
-@Entity('product_preset')
+@Entity('product_presets')
 export class ProductPreset {
     @PrimaryGeneratedColumn()
     id: number;
@@ -28,13 +29,16 @@ export class ProductPreset {
     @JoinColumn()
     @Index('idx_product_preset_game_id')
     game: Game;
-    
-    @Column()
-    imageKey: string;
 
-    @CreateDateColumn()
+    @OneToMany(() => ProductListing, (productListing) => productListing.productPreset)
+    productListings: ProductListing[];
+    
+    @Column({ name: 'image_url_key' })
+    imageUrlKey: string;
+
+    @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn({ name: 'updated_at' })
     updatedAt: Date;
 }
