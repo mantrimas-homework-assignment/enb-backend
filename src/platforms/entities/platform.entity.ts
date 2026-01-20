@@ -5,11 +5,11 @@ export class Platform {
   @PrimaryGeneratedColumn()
   id: string;
 
-  @Column({ type: 'varchar', length: 100, unique: true })
+  @Column({ type: 'varchar', unique: true })
   name: string;
 
-  @Column({ type: 'varchar', length: 500, nullable: true })
-  iconUrl: string;
+  @Column({ type: 'varchar', nullable: true })
+  iconKey: string;
 
   @CreateDateColumn()
   createdAt: Date;

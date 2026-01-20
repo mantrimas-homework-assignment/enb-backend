@@ -21,6 +21,6 @@ const serviceProviders: Array<Provider> = [
 @Global()
 @Module({
     providers: [...googleCloudStorageProviders, ...serviceProviders],
-    exports: [...googleCloudStorageProviders]
+    exports: [...googleCloudStorageProviders, ...serviceProviders]
 })
 export class GoogleCloudStorageModule {}
