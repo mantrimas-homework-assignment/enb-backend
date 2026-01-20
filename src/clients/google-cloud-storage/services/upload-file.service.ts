@@ -6,7 +6,7 @@ export class UploadFileService implements UploadFileUseCase {
     private readonly storage: Storage,
   ) {}
 
-  async execute(payload: UploadFilePort): Promise<string | null> {
+  async execute(payload: UploadFilePort): Promise<string> {
     try {
       const { bucketName, fileName, fileStream, metadata } = payload;
 
@@ -17,11 +17,11 @@ export class UploadFileService implements UploadFileUseCase {
 
       if (metadata?.public) {
         await file.makePublic();
-        const fileUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
-        return fileUrl;
       }
 
-      return null;
+      const filePath = `${bucketName}/${fileName}`;
+
+      return filePath;
     } catch (error) {
       throw new Error(`Failed to upload file to Google Cloud Storage: ${error.message}`);
     }

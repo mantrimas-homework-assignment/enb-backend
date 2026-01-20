@@ -10,4 +10,4 @@ export type UploadFilePort = {
     }
 }
 
-export interface UploadFileUseCase extends UseCase<UploadFilePort, string | null> {} 
+export interface UploadFileUseCase extends UseCase<UploadFilePort, string> {} 
