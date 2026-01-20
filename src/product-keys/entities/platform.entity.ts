@@ -1,9 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { ProductPreset } from "./product-preset.entity";
 
 @Entity('platforms')
 export class Platform {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @OneToMany(() => ProductPreset, (productPreset) => productPreset.platform)
+    productPresets: ProductPreset[];
 
     @Column({ unique: true })
     name: string;

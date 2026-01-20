@@ -12,7 +12,7 @@ const serviceProviders: Array<Provider> = [
         inject: [GoogleCloudStorageDiTokens.GoogleCloudStorageProvider]
     },
     {
-        provide: GoogleCloudStorageDiTokens.GetPublicUrlService,
+        provide: GoogleCloudStorageDiTokens.GetPublicFileUrlService,
         useFactory:(googleCloudStorage: Storage) => new GetPublicFileUrlService(googleCloudStorage),
         inject: [GoogleCloudStorageDiTokens.GoogleCloudStorageProvider]
     }
