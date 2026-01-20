@@ -11,7 +11,7 @@ import { ProductListing } from "src/product-keys/entities/product-listing.entity
 export const databaseProviders: Array<Provider> = [
     {
         provide: DatabaseDiTokens.PostgresDataSource,
-        useFactory: () => {
+        useFactory: async () => {
             const dataSource: DataSource = new DataSource({
                 type: 'postgres',
                 host: process.env.POSTGRES_HOST,
@@ -24,7 +24,11 @@ export const databaseProviders: Array<Provider> = [
                 logging: process.env.NODE_ENV === "development",
             });
 
-            return dataSource.initialize();
+            await dataSource.initialize();
+
+            await dataSource.query('CREATE EXTENSION IF NOT EXISTS pg_trgm');
+
+            return dataSource;
         }
     }
 ]
