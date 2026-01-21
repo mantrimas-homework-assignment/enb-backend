@@ -8,7 +8,7 @@ export class RegionDto {
 
 export class PlatformDto {
     name: string;
-    iconUrlKey: string;
+    iconUrl: string;
 }
 
 export class GameDto {
@@ -20,7 +20,7 @@ export class ProductPresetDto {
     region: RegionDto;
     platform: PlatformDto;
     game: GameDto;
-    imageUrlKey: string;
+    imageUrl: string;
 }
 
 export class ProductListingDto {
