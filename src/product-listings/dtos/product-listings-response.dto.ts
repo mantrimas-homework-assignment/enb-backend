@@ -33,7 +33,7 @@ export class ProductListingDto {
 }
 
 export class ProductListingResponseDto {
-    productListing: ProductListingDto[];
+    productListings: ProductListingDto[];
     productListingCount: number;
 }
 

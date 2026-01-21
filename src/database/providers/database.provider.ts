@@ -1,28 +1,13 @@
 import { Provider } from "@nestjs/common";
 import { DataSource } from "typeorm";
 import { DatabaseDiTokens } from "../di/database-tokens.di";
-import { Platform } from "src/product-listings/entities/platform.entity";
-import { Region } from "src/product-listings/entities/region.entity";
-import { Game } from "src/product-listings/entities/game.entity";
-import { Hardware } from "src/product-listings/entities/hardware.entity";
-import { ProductPreset } from "src/product-listings/entities/product-preset.entity";
-import { ProductListing } from "src/product-listings/entities/product-listing.entity";
+import { getDataSourceConfig } from "../config/datasource.config";
 
 export const databaseProviders: Array<Provider> = [
     {
         provide: DatabaseDiTokens.PostgresDataSource,
         useFactory: async () => {
-            const dataSource: DataSource = new DataSource({
-                type: 'postgres',
-                host: process.env.POSTGRES_HOST,
-                port: parseInt(process.env.POSTGRES_PORT),
-                username: process.env.POSTGRES_USER,
-                password: process.env.POSTGRES_PASSWORD,
-                database: process.env.POSTGRES_DB_NAME,
-                entities: [Platform, Region, Game, Hardware, ProductPreset, ProductListing],
-                synchronize: true,
-                logging: process.env.NODE_ENV === "development",
-            });
+            const dataSource: DataSource = new DataSource(getDataSourceConfig());
 
             await dataSource.initialize();
 

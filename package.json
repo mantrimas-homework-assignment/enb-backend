@@ -18,7 +18,13 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "seed:platforms": "ts-node -r tsconfig-paths/register src/platforms/scripts/seed-platforms.ts"
+    "seed": "ts-node -r tsconfig-paths/register src/database/scripts/seed.ts",
+    "seed:hardware": "ts-node -r tsconfig-paths/register src/database/scripts/seed-hardware.ts",
+    "seed:regions": "ts-node -r tsconfig-paths/register src/database/scripts/seed-regions.ts",
+    "seed:platforms": "ts-node -r tsconfig-paths/register src/database/scripts/seed-platforms.ts",
+    "seed:games": "ts-node -r tsconfig-paths/register src/database/scripts/seed-games.ts",
+    "seed:product-presets": "ts-node -r tsconfig-paths/register src/database/scripts/seed-product-presets.ts",
+    "seed:product-listings": "ts-node -r tsconfig-paths/register src/database/scripts/seed-product-listings.ts"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.18.0",

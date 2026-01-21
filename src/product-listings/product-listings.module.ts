@@ -7,6 +7,7 @@ import { ProductListingRepositoryInterface } from "./repositories/product-listin
 import { ProductListingRepository } from "./repositories/postgres/product-listing.repository";
 import { GetAllProductListingsService } from "./services/get-all-product-listings.service";
 import { GetProductListingsByFuzzyNameService } from "./services/get-product-listings-by-fuzzy-name.service";
+import { ProductListingController } from "./controllers/product-listing.controller";
 
 const repositoryProviders: Array<Provider> = [
     {   
@@ -35,6 +36,7 @@ const serviceProviders: Array<Provider> = [
 ]
 
 @Module({
-    providers: [...serviceProviders, ...repositoryProviders]
+    providers: [...serviceProviders, ...repositoryProviders],
+    controllers: [ProductListingController]
 })
 export class ProductListingsModule {}
