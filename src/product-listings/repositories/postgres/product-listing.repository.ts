@@ -3,7 +3,7 @@ import { ProductListingRepositoryInterface, PaginationOptions, SearchOptions } f
 import { ProductListing } from "src/product-listings/entities/product-listing.entity";
 
 export class ProductListingRepository implements ProductListingRepositoryInterface {
-    private readonly SIMILARITY_THRESHOLD = 0.3;
+    private readonly SIMILARITY_THRESHOLD = 0.1;
 
     constructor(
         private readonly repository: Repository<ProductListing>
@@ -42,19 +42,20 @@ export class ProductListingRepository implements ProductListingRepositoryInterfa
             .leftJoinAndSelect('productPreset.platform', 'platform')
             .leftJoinAndSelect('productPreset.region', 'region');
 
-        queryBuilder.where(
-            '(similarity(game.name, :searchTerm) > :threshold OR game.name ILIKE :searchPattern)',
-            { 
-                searchTerm: searchTerm.trim(),
-                threshold: this.SIMILARITY_THRESHOLD,
-                searchPattern: `%${searchTerm.trim()}%`
-            }
-        );
+        queryBuilder
+            .addSelect('similarity(game.name, :searchTerm)', 'name_similarity')
+            .where(
+                '(similarity(game.name, :searchTerm) > :threshold OR game.name ILIKE :searchPattern)',
+                { 
+                    searchTerm: searchTerm.trim(),
+                    threshold: this.SIMILARITY_THRESHOLD,
+                    searchPattern: `%${searchTerm.trim()}%`
+                }
+            );
 
         queryBuilder
-            .orderBy('similarity(game.name, :searchTerm)', 'DESC')
+            .orderBy('name_similarity', 'DESC')
             .addOrderBy('game.name', 'ASC')
-            .setParameter('searchTerm', searchTerm.trim())
             .take(limit)
             .skip(offset);
 
