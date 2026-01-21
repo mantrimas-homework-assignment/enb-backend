@@ -9,8 +9,6 @@ async function seedRegions() {
         await dataSource.initialize();
 
         const regionRepo = dataSource.getRepository(Region);
-        
-        await regionRepo.createQueryBuilder().delete().execute();
 
         const regionData = [
             { name: 'North America' },
@@ -22,8 +20,10 @@ async function seedRegions() {
             { name: 'Global' },
         ];
 
-        const regions = await regionRepo.save(regionData);
-        console.log(`Successfully seeded ${regions.length} regions`);
+        await regionRepo.upsert(regionData, ['name']);
+
+        const regions = await regionRepo.find();
+        console.log(`Successfully seeded ${regions.length} regions (upsert mode)`);
         
     } catch (error) {
         console.error('Error seeding regions:', error);

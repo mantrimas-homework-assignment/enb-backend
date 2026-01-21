@@ -9,8 +9,6 @@ async function seedPlatforms() {
         await dataSource.initialize();
 
         const platformRepo = dataSource.getRepository(Platform);
-        
-        await platformRepo.createQueryBuilder().delete().execute();
 
         const platformData = [
             { name: 'Steam', iconUrlKey: 'platforms/steam.png' },
@@ -24,8 +22,10 @@ async function seedPlatforms() {
             { name: 'Battle.net', iconUrlKey: 'platforms/battlenet.png' },
         ];
 
-        const platforms = await platformRepo.save(platformData);
-        console.log(`Successfully seeded ${platforms.length} platforms`);
+        await platformRepo.upsert(platformData, ['name']);
+
+        const platforms = await platformRepo.find();
+        console.log(`Successfully seeded ${platforms.length} platforms (upsert mode)`);
         
     } catch (error) {
         console.error('Error seeding platforms:', error);

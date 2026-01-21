@@ -9,8 +9,6 @@ async function seedHardware() {
         await dataSource.initialize();
 
         const hardwareRepo = dataSource.getRepository(Hardware);
-        
-        await hardwareRepo.createQueryBuilder().delete().execute();
 
         const hardwareData = [
             { name: 'PC' },
@@ -23,8 +21,10 @@ async function seedHardware() {
             { name: 'Nintendo 3DS' },
         ];
 
-        const hardware = await hardwareRepo.save(hardwareData);
-        console.log(`Successfully seeded ${hardware.length} hardware items`);
+        await hardwareRepo.upsert(hardwareData, ['name']);
+
+        const hardware = await hardwareRepo.find();
+        console.log(`Successfully seeded ${hardware.length} hardware items (upsert mode)`);
         
     } catch (error) {
         console.error('Error seeding hardware:', error);

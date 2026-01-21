@@ -12,39 +12,57 @@ async function seedProductListings() {
         const productListingRepo = dataSource.getRepository(ProductListing);
         const productPresetRepo = dataSource.getRepository(ProductPreset);
 
-        const productPresets = await productPresetRepo.find();
+        const productPresets = await productPresetRepo.find({ relations: ['game', 'platform'] });
 
         if (productPresets.length === 0) {
             console.error('Please seed Product Presets first!');
             process.exit(1);
         }
 
-        await productListingRepo.createQueryBuilder().delete().execute();
+        const existingCount = await productListingRepo.count();
+        
+        if (existingCount > 0) {
+            console.log(`Product Listings already seeded (${existingCount} records). Skipping...`);
+            return;
+        }
 
         const productListings = [];
 
         for (const preset of productPresets) {
-            const numListings = Math.floor(Math.random() * 4) + 2;
-            
-            for (let i = 0; i < numListings; i++) {
-                const basePrice = Math.floor(Math.random() * 50 + 10) * 100;
-                const cashback = Math.floor(basePrice * 0.11);
-                const discountedPrice = basePrice - Math.floor(Math.random() * basePrice * 0.3); 
-                const likeCount = Math.floor(Math.random() * 100);
-
-                const listing = productListingRepo.create({
+            const basePrice = 5999;
+            productListings.push(
+                productListingRepo.create({
                     productPreset: preset,
                     price: basePrice,
-                    cashback: cashback,
-                    discountedPrice: discountedPrice,
-                    likeCount: likeCount,
-                });
-                productListings.push(listing);
-            }
+                    cashback: 600,
+                    discountedPrice: basePrice - 1000,
+                    likeCount: 42,
+                })
+            );
+            
+            productListings.push(
+                productListingRepo.create({
+                    productPreset: preset,
+                    price: basePrice + 500,
+                    cashback: 650,
+                    discountedPrice: basePrice,
+                    likeCount: 38,
+                })
+            );
+            
+            productListings.push(
+                productListingRepo.create({
+                    productPreset: preset,
+                    price: basePrice - 1000,
+                    cashback: 550,
+                    discountedPrice: basePrice - 1500,
+                    likeCount: 51,
+                })
+            );
         }
 
         const savedListings = await productListingRepo.save(productListings);
-        console.log(`Successfully seeded ${savedListings.length} product listings`);
+        console.log(`Successfully seeded ${savedListings.length} product listings (upsert mode)`);
         
     } catch (error) {
         console.error('Error seeding product listings:', error);
@@ -55,4 +73,3 @@ async function seedProductListings() {
 }
 
 seedProductListings();
-

@@ -9,8 +9,6 @@ async function seedGames() {
         await dataSource.initialize();
 
         const gameRepo = dataSource.getRepository(Game);
-        
-        await gameRepo.createQueryBuilder().delete().execute();
 
         const gameData = [
             { name: 'The Legend of Zelda: Breath of the Wild' },
@@ -30,8 +28,10 @@ async function seedGames() {
             { name: 'Call of Duty: Modern Warfare III' },
         ];
 
-        const games = await gameRepo.save(gameData);
-        console.log(`Successfully seeded ${games.length} games`);
+        await gameRepo.upsert(gameData, ['name']);
+
+        const games = await gameRepo.find();
+        console.log(`Successfully seeded ${games.length} games (upsert mode)`);
         
     } catch (error) {
         console.error('Error seeding games:', error);
