@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import { ProductListingRepositoryInterface, PaginationOptions, SearchOptions } from "../product-listing-repository.interface";
-import { ProductListing } from "src/product-keys/entities/product-listing.entity";
+import { ProductListing } from "src/product-listings/entities/product-listing.entity";
 
 export class ProductListingRepository implements ProductListingRepositoryInterface {
     private readonly SIMILARITY_THRESHOLD = 0.3;
