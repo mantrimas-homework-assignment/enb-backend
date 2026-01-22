@@ -11,15 +11,15 @@ async function seedPlatforms() {
         const platformRepo = dataSource.getRepository(Platform);
 
         const platformData = [
-            { name: 'Steam', iconUrlKey: 'platforms/steam.png' },
-            { name: 'Epic Games Store', iconUrlKey: 'platforms/epic.png' },
-            { name: 'PlayStation Store', iconUrlKey: 'platforms/playstation.png' },
-            { name: 'Xbox Live', iconUrlKey: 'platforms/xbox.png' },
-            { name: 'Nintendo eShop', iconUrlKey: 'platforms/nintendo.png' },
-            { name: 'GOG', iconUrlKey: 'platforms/gog.png' },
-            { name: 'Origin', iconUrlKey: 'platforms/origin.png' },
-            { name: 'Ubisoft Connect', iconUrlKey: 'platforms/ubisoft.png' },
-            { name: 'Battle.net', iconUrlKey: 'platforms/battlenet.png' },
+            { name: 'Steam', iconUrlKey: 'platforms/steam.svg' },
+            { name: 'Epic Games', iconUrlKey: 'platforms/epic.svg' },
+            { name: 'GOG', iconUrlKey: 'platforms/gog.svg' },
+            { name: 'PSN', iconUrlKey: 'platforms/playstation.svg' },
+            { name: 'Xbox Live', iconUrlKey: 'platforms/xbox.svg' },
+            { name: 'Nintendo', iconUrlKey: 'platforms/nintendo.svg' },
+            { name: 'Origin', iconUrlKey: 'platforms/origin.svg' },
+            { name: 'EA App', iconUrlKey: 'platforms/ea.svg' },
+            { name: 'Rockstar Games Launcher', iconUrlKey: 'platforms/rockstar.svg' },
         ];
 
         await platformRepo.upsert(platformData, ['name']);

@@ -15,10 +15,9 @@ async function seedHardware() {
             { name: 'PlayStation 5' },
             { name: 'Xbox Series X' },
             { name: 'Nintendo Switch' },
-            { name: 'Mobile' },
+            { name: 'Nintendo Switch 2' },
             { name: 'PlayStation 4' },
             { name: 'Xbox One' },
-            { name: 'Nintendo 3DS' },
         ];
 
         await hardwareRepo.upsert(hardwareData, ['name']);
