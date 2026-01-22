@@ -21,7 +21,7 @@ export class ProductListing {
     @Column({ name: 'cashback' })
     cashback: number;
 
-    @Column({ name: 'discounted_price' })
+    @Column({ name: 'discounted_price', nullable: true })
     discountedPrice: number;
 
     @Column({ name: 'like_count' })
