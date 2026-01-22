@@ -16,33 +16,51 @@ async function clearDatabase() {
         await dataSource.initialize();
 
         console.log('Deleting Product Listings...');
-        const productListingRepo = dataSource.getRepository(ProductListing);
-        const listingsDeleted = await productListingRepo.delete({});
+        const listingsDeleted = await dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(ProductListing)
+            .execute();
         console.log(`✓ Deleted ${listingsDeleted.affected || 0} product listings`);
 
         console.log('Deleting Product Presets...');
-        const productPresetRepo = dataSource.getRepository(ProductPreset);
-        const presetsDeleted = await productPresetRepo.delete({});
+        const presetsDeleted = await dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(ProductPreset)
+            .execute();
         console.log(`✓ Deleted ${presetsDeleted.affected || 0} product presets`);
 
         console.log('Deleting Games...');
-        const gameRepo = dataSource.getRepository(Game);
-        const gamesDeleted = await gameRepo.delete({});
+        const gamesDeleted = await dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(Game)
+            .execute();
         console.log(`✓ Deleted ${gamesDeleted.affected || 0} games`);
 
         console.log('Deleting Platforms...');
-        const platformRepo = dataSource.getRepository(Platform);
-        const platformsDeleted = await platformRepo.delete({});
+        const platformsDeleted = await dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(Platform)
+            .execute();
         console.log(`✓ Deleted ${platformsDeleted.affected || 0} platforms`);
 
         console.log('Deleting Regions...');
-        const regionRepo = dataSource.getRepository(Region);
-        const regionsDeleted = await regionRepo.delete({});
+        const regionsDeleted = await dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(Region)
+            .execute();
         console.log(`✓ Deleted ${regionsDeleted.affected || 0} regions`);
 
         console.log('Deleting Hardware...');
-        const hardwareRepo = dataSource.getRepository(Hardware);
-        const hardwareDeleted = await hardwareRepo.delete({});
+        const hardwareDeleted = await dataSource
+            .createQueryBuilder()
+            .delete()
+            .from(Hardware)
+            .execute();
         console.log(`✓ Deleted ${hardwareDeleted.affected || 0} hardware entries`);
 
         console.log('');
