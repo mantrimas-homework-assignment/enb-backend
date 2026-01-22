@@ -143,3 +143,6 @@ docker/
 
 # test env
 test.env
+
+#Credentials
+credentials/
