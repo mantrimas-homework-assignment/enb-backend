@@ -9,7 +9,7 @@ export class ProductListingRepository implements ProductListingRepositoryInterfa
         private readonly repository: Repository<ProductListing>
     ) {}
 
-    async findAll(options?: PaginationOptions): Promise<[ProductListing[], number]> {
+    async findAll(options?: PaginationOptions): Promise<[ProductListing[] | null, number]> {
         const limit = options?.limit ?? 20;
         const offset = options?.offset ?? 0;
 
@@ -29,7 +29,7 @@ export class ProductListingRepository implements ProductListingRepositoryInterfa
         return [results, totalCount];
     }
 
-    async findByFuzzyGameName(payload: SearchOptions): Promise<[ProductListing[], number]> {
+    async findByFuzzyGameName(payload: SearchOptions): Promise<[ProductListing[] | null, number]> {
         const limit = payload.limit ?? 20;
         const offset = payload.offset ?? 0;
         const searchTerm = payload.searchTerm;

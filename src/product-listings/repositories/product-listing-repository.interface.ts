@@ -10,6 +10,6 @@ export interface SearchOptions extends PaginationOptions {
 }
 
 export interface ProductListingRepositoryInterface {
-    findAll(options?: PaginationOptions): Promise<[ProductListing[], number]>;
-    findByFuzzyGameName(payload: SearchOptions): Promise<[ProductListing[], number]>;
+    findAll(options?: PaginationOptions): Promise<[ProductListing[] | null, number]>;
+    findByFuzzyGameName(payload: SearchOptions): Promise<[ProductListing[] | null, number]>;
 }
