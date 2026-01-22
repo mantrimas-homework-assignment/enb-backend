@@ -15,10 +15,8 @@ export class GetPublicFileUrlService implements GetPublicFileUrlUseCase {
       const file = bucket.file(fileName);
 
       const [exists] = await file.exists();
-      if (!exists) {
-        throw new NotFoundException(`File ${fileName} does not exist in bucket ${bucketName}`);
-      }
-
+      if (!exists) throw new NotFoundException(`File ${fileName} does not exist in bucket ${bucketName}`);
+      
       const publicUrl = `https://storage.googleapis.com/${bucketName}/${fileName}`;
 
       return publicUrl;

@@ -42,7 +42,6 @@ async function seedProductPresets() {
 
         const eldenRing = await gameRepo.findOne({ where: { name: 'Elden Ring' } });
         const cyberpunk = await gameRepo.findOne({ where: { name: 'Cyberpunk 2077' } });
-        const zelda = await gameRepo.findOne({ where: { name: 'The Legend of Zelda: Breath of the Wild' } });
         const godOfWar = await gameRepo.findOne({ where: { name: 'God of War' } });
         const splitFiction = await gameRepo.findOne({ where: { name: 'Split Fiction' } });
         const rdr2 = await gameRepo.findOne({ where: { name: 'Red Dead Redemption 2' } });
@@ -50,7 +49,7 @@ async function seedProductPresets() {
 
         if (!pc || !ps5 || !ps4 || !xboxSeriesX || !xboxOne || !nintendoSwitch || !nintendoSwitch2 || !northAmerica || !europe || !global ||
             !steam || !epicGames || !gog || !playstationStore || !xboxStore || !nintendoEshop || !origin || !rockstarLauncher || !eaApp ||
-            !eldenRing || !cyberpunk || !zelda || !godOfWar || !splitFiction || !rdr2 || !fifa23) {
+            !eldenRing || !cyberpunk || !godOfWar || !splitFiction || !rdr2 || !fifa23) {
             console.error('Please seed Hardware, Regions, Platforms, and Games first!');
             process.exit(1);
         }
@@ -62,9 +61,6 @@ async function seedProductPresets() {
             { hardware: pc, region: global, platform: steam, game: cyberpunk, imageUrlKey: 'products/cyberpunk.jpg' },
             { hardware: pc, region: global, platform: gog, game: cyberpunk, imageUrlKey: 'products/cyberpunk.jpg' },
             { hardware: pc, region: europe, platform: xboxStore, game: cyberpunk, imageUrlKey: 'products/cyberpunk-xbox.jpg' },
-            
-            { hardware: nintendoSwitch, region: northAmerica, platform: nintendoEshop, game: zelda, imageUrlKey: 'products/zelda-switch.jpg' },
-            { hardware: nintendoSwitch, region: europe, platform: nintendoEshop, game: zelda, imageUrlKey: 'products/zelda-switch.jpg' },
             
             { hardware: ps4, region: northAmerica, platform: playstationStore, game: godOfWar, imageUrlKey: 'products/god-of-war-ps4.jpg' },
             { hardware: ps4, region: europe, platform: playstationStore, game: godOfWar, imageUrlKey: 'products/god-of-war-ps4.jpg' },
