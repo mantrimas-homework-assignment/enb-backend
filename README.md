@@ -18,7 +18,6 @@
 - **ORM**: TypeORM
 - **Cloud Storage**: Google Cloud Storage
 - **Containerization**: Docker & Docker Compose
-- **Testing**: Jest
 
 ## Architecture Overview
 
