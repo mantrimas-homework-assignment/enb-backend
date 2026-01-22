@@ -9,9 +9,9 @@ export class GetAllProductListingsService implements GetAllProductListingsUseCas
     ) {}
 
     async execute(): Promise<[ProductListing[], number]> {
-        const productListingsAndCount = await this.productListingRepository.findAll()
-        if (!productListingsAndCount) throw new NotFoundException('No existing product listings')
+        const [productListings, productListingsCount] = await this.productListingRepository.findAll()
+        if (!productListings) throw new NotFoundException('No existing product listings')
 
-        return productListingsAndCount;           
+        return [productListings, productListingsCount];           
     }
 }
