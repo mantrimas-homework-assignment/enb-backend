@@ -28,19 +28,22 @@ async function seedProductPresets() {
         const global = await regionRepo.findOne({ where: { name: 'Global' } });
 
         const steam = await platformRepo.findOne({ where: { name: 'Steam' } });
-        const epicGames = await platformRepo.findOne({ where: { name: 'Epic Games Store' } });
-        const playstationStore = await platformRepo.findOne({ where: { name: 'PlayStation Store' } });
-        const xboxStore = await platformRepo.findOne({ where: { name: 'Xbox Store' } });
-        const nintendoEshop = await platformRepo.findOne({ where: { name: 'Nintendo eShop' } });
+        const epicGames = await platformRepo.findOne({ where: { name: 'Epic Games' } });
+        const playstationStore = await platformRepo.findOne({ where: { name: 'PSN' } });
+        const xboxStore = await platformRepo.findOne({ where: { name: 'Xbox Live' } });
+        const nintendoEshop = await platformRepo.findOne({ where: { name: 'Nintendo' } });
 
         const eldenRing = await gameRepo.findOne({ where: { name: 'Elden Ring' } });
         const cyberpunk = await gameRepo.findOne({ where: { name: 'Cyberpunk 2077' } });
         const zelda = await gameRepo.findOne({ where: { name: 'The Legend of Zelda: Breath of the Wild' } });
         const godOfWar = await gameRepo.findOne({ where: { name: 'God of War' } });
+        const splitFiction = await gameRepo.findOne({ where: { name: 'Split Fiction' } });
+        const rdr2 = await gameRepo.findOne({ where: { name: 'Red Dead Redemption 2' } });
+        const fifa23 = await gameRepo.findOne({ where: { name: 'FIFA 23' } });
 
         if (!pc || !ps5 || !xboxSeriesX || !nintendoSwitch || !northAmerica || !europe || !global || 
             !steam || !epicGames || !playstationStore || !xboxStore || !nintendoEshop ||
-            !eldenRing || !cyberpunk || !zelda || !godOfWar) {
+            !eldenRing || !cyberpunk || !zelda || !godOfWar || !splitFiction || !rdr2 || !fifa23) {
             console.error('Please seed Hardware, Regions, Platforms, and Games first!');
             process.exit(1);
         }
@@ -53,22 +56,44 @@ async function seedProductPresets() {
         }
 
         const productPresets = [
-            { hardware: pc, region: global, platform: steam, game: eldenRing, imageUrlKey: 'products/elden-ring-pc-steam.jpg' },
-            { hardware: pc, region: global, platform: epicGames, game: eldenRing, imageUrlKey: 'products/elden-ring-pc-epic.jpg' },
-            { hardware: ps5, region: northAmerica, platform: playstationStore, game: eldenRing, imageUrlKey: 'products/elden-ring-ps5-na.jpg' },
-            { hardware: xboxSeriesX, region: northAmerica, platform: xboxStore, game: eldenRing, imageUrlKey: 'products/elden-ring-xbox-na.jpg' },
+            { hardware: pc, region: global, platform: steam, game: eldenRing, imageUrlKey: 'products/elden-ring-pc.jpg' },
+            { hardware: pc, region: global, platform: epicGames, game: eldenRing, imageUrlKey: 'products/elden-ring-pc.jpg' },
+            { hardware: ps5, region: northAmerica, platform: playstationStore, game: eldenRing, imageUrlKey: 'products/elden-ring-ps5.jpg' },
+            { hardware: xboxSeriesX, region: northAmerica, platform: xboxStore, game: eldenRing, imageUrlKey: 'products/elden-ring-xbox.jpg' },
             
-            { hardware: pc, region: global, platform: steam, game: cyberpunk, imageUrlKey: 'products/cyberpunk-pc-steam.jpg' },
-            { hardware: pc, region: global, platform: epicGames, game: cyberpunk, imageUrlKey: 'products/cyberpunk-pc-epic.jpg' },
-            { hardware: ps5, region: northAmerica, platform: playstationStore, game: cyberpunk, imageUrlKey: 'products/cyberpunk-ps5-na.jpg' },
-            { hardware: xboxSeriesX, region: europe, platform: xboxStore, game: cyberpunk, imageUrlKey: 'products/cyberpunk-xbox-eu.jpg' },
+            { hardware: pc, region: global, platform: steam, game: cyberpunk, imageUrlKey: 'products/cyberpunk-pc.jpg' },
+            { hardware: pc, region: global, platform: epicGames, game: cyberpunk, imageUrlKey: 'products/cyberpunk-pc.jpg' },
+            { hardware: ps5, region: northAmerica, platform: playstationStore, game: cyberpunk, imageUrlKey: 'products/cyberpunk-ps5.jpg' },
+            { hardware: xboxSeriesX, region: europe, platform: xboxStore, game: cyberpunk, imageUrlKey: 'products/cyberpunk-xbox.jpg' },
             
-            { hardware: nintendoSwitch, region: northAmerica, platform: nintendoEshop, game: zelda, imageUrlKey: 'products/zelda-switch-na.jpg' },
-            { hardware: nintendoSwitch, region: europe, platform: nintendoEshop, game: zelda, imageUrlKey: 'products/zelda-switch-eu.jpg' },
+            { hardware: nintendoSwitch, region: northAmerica, platform: nintendoEshop, game: zelda, imageUrlKey: 'products/zelda-switch.jpg' },
+            { hardware: nintendoSwitch, region: europe, platform: nintendoEshop, game: zelda, imageUrlKey: 'products/zelda-switch.jpg' },
             
-            { hardware: ps5, region: northAmerica, platform: playstationStore, game: godOfWar, imageUrlKey: 'products/god-of-war-ps5-na.jpg' },
-            { hardware: ps5, region: europe, platform: playstationStore, game: godOfWar, imageUrlKey: 'products/god-of-war-ps5-eu.jpg' },
-            { hardware: pc, region: global, platform: steam, game: godOfWar, imageUrlKey: 'products/god-of-war-pc-steam.jpg' },
+            { hardware: ps5, region: northAmerica, platform: playstationStore, game: godOfWar, imageUrlKey: 'products/god-of-war-ps5.jpg' },
+            { hardware: ps5, region: europe, platform: playstationStore, game: godOfWar, imageUrlKey: 'products/god-of-war-ps5.jpg' },
+            { hardware: pc, region: global, platform: steam, game: godOfWar, imageUrlKey: 'products/god-of-war-pc.jpg' },
+            
+            { hardware: pc, region: global, platform: steam, game: splitFiction, imageUrlKey: 'products/split-fiction-pc.jpg' },
+            { hardware: pc, region: global, platform: epicGames, game: splitFiction, imageUrlKey: 'products/split-fiction-pc.jpg' },
+            { hardware: ps5, region: northAmerica, platform: playstationStore, game: splitFiction, imageUrlKey: 'products/split-fiction-ps5.jpg' },
+            { hardware: ps5, region: europe, platform: playstationStore, game: splitFiction, imageUrlKey: 'products/split-fiction-ps5.jpg' },
+            { hardware: xboxSeriesX, region: northAmerica, platform: xboxStore, game: splitFiction, imageUrlKey: 'products/split-fiction-xbox.jpg' },
+            { hardware: xboxSeriesX, region: europe, platform: xboxStore, game: splitFiction, imageUrlKey: 'products/split-fiction-xbox.jpg' },
+            
+            { hardware: pc, region: global, platform: steam, game: rdr2, imageUrlKey: 'products/rdr2-pc.jpg' },
+            { hardware: pc, region: global, platform: epicGames, game: rdr2, imageUrlKey: 'products/rdr2-pc.jpg' },
+            { hardware: ps5, region: northAmerica, platform: playstationStore, game: rdr2, imageUrlKey: 'products/rdr2-ps5.jpg' },
+            { hardware: ps5, region: europe, platform: playstationStore, game: rdr2, imageUrlKey: 'products/rdr2-ps5.jpg' },
+            { hardware: xboxSeriesX, region: northAmerica, platform: xboxStore, game: rdr2, imageUrlKey: 'products/rdr2-xbox.jpg' },
+            { hardware: xboxSeriesX, region: europe, platform: xboxStore, game: rdr2, imageUrlKey: 'products/rdr2-xbox.jpg' },
+            
+            { hardware: pc, region: global, platform: steam, game: fifa23, imageUrlKey: 'products/fifa-23-pc.jpg' },
+            { hardware: ps5, region: northAmerica, platform: playstationStore, game: fifa23, imageUrlKey: 'products/fifa-23-ps5.jpg' },
+            { hardware: ps5, region: europe, platform: playstationStore, game: fifa23, imageUrlKey: 'products/fifa-23-ps5.jpg' },
+            { hardware: xboxSeriesX, region: northAmerica, platform: xboxStore, game: fifa23, imageUrlKey: 'products/fifa-23-xbox.jpg' },
+            { hardware: xboxSeriesX, region: europe, platform: xboxStore, game: fifa23, imageUrlKey: 'products/fifa-23-xbox.jpg' },
+            { hardware: nintendoSwitch, region: northAmerica, platform: nintendoEshop, game: fifa23, imageUrlKey: 'products/fifa-23-switch.jpg' },
+            { hardware: nintendoSwitch, region: europe, platform: nintendoEshop, game: fifa23, imageUrlKey: 'products/fifa-23-switch.jpg' },
         ];
 
         const savedPresets = await productPresetRepo.save(productPresets);

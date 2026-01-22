@@ -26,6 +26,8 @@ async function seedGames() {
             { name: 'Minecraft' },
             { name: 'Fortnite' },
             { name: 'Call of Duty: Modern Warfare III' },
+            { name: 'Split Fiction' },
+            { name: 'FIFA 23' },
         ];
 
         await gameRepo.upsert(gameData, ['name']);

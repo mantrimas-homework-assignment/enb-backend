@@ -14,7 +14,7 @@ async function seedPlatforms() {
             { name: 'Steam', iconUrlKey: 'platforms/steam.png' },
             { name: 'Epic Games Store', iconUrlKey: 'platforms/epic.png' },
             { name: 'PlayStation Store', iconUrlKey: 'platforms/playstation.png' },
-            { name: 'Xbox Store', iconUrlKey: 'platforms/xbox.png' },
+            { name: 'Xbox Live', iconUrlKey: 'platforms/xbox.png' },
             { name: 'Nintendo eShop', iconUrlKey: 'platforms/nintendo.png' },
             { name: 'GOG', iconUrlKey: 'platforms/gog.png' },
             { name: 'Origin', iconUrlKey: 'platforms/origin.png' },
