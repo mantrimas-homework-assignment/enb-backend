@@ -295,7 +295,3 @@ npm run db:reset
   "productListingCount": 150
 }
 ```
-
-## License
-
-UNLICENSED - Private project
