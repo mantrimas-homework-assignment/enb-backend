@@ -20,56 +20,10 @@ export class ProductListingController {
     ) {}
 
     @Get('list')
-    async getAllProductListings(): Promise<ProductListingResponseDto> {
-        const [productListings, count] = await this.getAllProductListingsService.execute();
-        
-        const mappedListings = await Promise.all(
-            productListings.map(async (listing) => {
-                const imageUrl = await this.getPublicFileUrlService.execute({
-                    bucketName: this.bucketName,
-                    fileName: listing.productPreset.imageUrlKey
-                });
-
-                const iconUrl = await this.getPublicFileUrlService.execute({
-                    bucketName: this.bucketName,
-                    fileName: listing.productPreset.platform.iconUrlKey
-                });
-
-                return {
-                    uuid: listing.uuid,
-                    productPreset: {
-                        hardware: {
-                            name: listing.productPreset.hardware.name
-                        },
-                        region: {
-                            name: listing.productPreset.region.name
-                        },
-                        platform: {
-                            name: listing.productPreset.platform.name,
-                            iconUrl: iconUrl
-                        },
-                        game: {
-                            name: listing.productPreset.game.name
-                        },
-                        imageUrl: imageUrl
-                    },
-                    price: listing.price,
-                    cashback: listing.cashback,
-                    discountedPrice: listing.discountedPrice,
-                    likeCount: listing.likeCount
-                };
-            })
-        );
-
-        return {
-            productListings: mappedListings,
-            productListingCount: count
-        };
-    }
-
-    @Get('search-list')
-    async getProductListingsByFuzzyName(@Query('search') searchName: string): Promise<ProductListingResponseDto> {
-        const [productListings, count] = await this.getProductListingsByFuzzyNameService.execute({ fuzzyName: searchName });
+    async getProductListings(@Query('search') searchName?: string): Promise<ProductListingResponseDto> {
+        const [productListings, count] = searchName
+            ? await this.getProductListingsByFuzzyNameService.execute({ fuzzyName: searchName })
+            : await this.getAllProductListingsService.execute();
 
         const mappedListings = await Promise.all(
             productListings.map(async (listing) => {
