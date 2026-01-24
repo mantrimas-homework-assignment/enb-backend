@@ -7,7 +7,7 @@ export const googleCloudStorageProviders: Array<Provider> = [
         provide: GoogleCloudStorageDiTokens.GoogleCloudStorageProvider,
         useFactory: () => {
             const googleCloudStorage = new Storage({
-                keyFilename: process.env.GOOGLE_CLOUD_KEY_FILE,
+                credentials: JSON.parse(process.env.GOOGLE_CLOUD_CREDENTIALS),
                 projectId: process.env.GOOGLE_CLOUD_PROJECT_ID
             });
 
