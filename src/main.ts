@@ -5,7 +5,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:8081',
+    origin: 'http://enb-search-app-front-e55cc9352a61.herokuapp.com/',
     credentials: true,
   });
 
